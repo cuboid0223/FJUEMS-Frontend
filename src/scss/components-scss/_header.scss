@@ -1,0 +1,141 @@
+.header {
+    padding: 5px;
+    width: 100%;
+    height: 50px;
+    position: fixed;
+    top: 0;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    z-index: 100;
+    box-shadow: 0px 5px 8px -9px rgba(0, 0, 0, 0.75);
+
+    &__burgerIcon {
+        display: none !important;
+        cursor: pointer;
+        color: $primary-color;
+
+        @include pad {
+            display: block !important;
+        }
+    }
+
+    &__logo {
+        color: $primary-color;
+        text-decoration: none;
+        letter-spacing: -6px;
+        margin-block-start: 0em;
+        margin-block-end: 0em;
+        font-size: 30px;
+        cursor: pointer;
+    }
+
+    &__wrap {
+        flex: 1;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        @include pad {
+            position: absolute;
+            width: 100%;
+            background-color: #fff;
+            display: unset;
+            top: 50px;
+            left: 0;
+            transform: translateX(-100%);
+            transition: 0.5s;
+        }
+    }
+
+    &__list {
+        list-style: none;
+        display: flex;
+        align-items: center;
+
+        height: auto;
+        padding-inline-start: 0px;
+        margin-bottom: 0rem;
+
+        @include pad {
+            display: unset;
+        }
+
+        &>li {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px 30px;
+            margin-left: 1rem;
+            border-radius: 20px;
+            letter-spacing: 3px;
+            font-weight: bold;
+
+            @include pad {
+                margin-left: 0rem;
+                margin: 20px 0px;
+            }
+
+            &>a {
+                color: black;
+            }
+
+            &:hover {
+                background-color: $primary-color;
+            }
+        }
+
+
+    }
+
+    &__search {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 2rem;
+
+        @include pad {
+            margin-right: 0rem;
+            margin-bottom: 1rem;
+        }
+
+        &>input {
+            width: 100%;
+            border-radius: 20px;
+            outline: none;
+            padding: 5px;
+            border: 1px solid $primary-color;
+        }
+
+        &__icon {
+            padding: 5px;
+
+            @include pad {
+                display: none !important;
+            }
+        }
+    }
+
+    & .NotificationsActiveIcon{
+        color: $primary-color;
+    }
+    &__counter{
+        border-radius: 50%;
+        background-color: red;
+        color: #fff;
+        font-size: 10px;
+        width: 15px;
+        height: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 6px;
+        right: 4px;
+    }
+}
+
+.active {
+    transform: translateX(0%);
+}

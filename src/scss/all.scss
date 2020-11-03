@@ -1,0 +1,17 @@
+@import "./grid";
+@import "./mixin";
+
+// components
+@import "./components-scss/app";
+@import "./components-scss/header";
+@import "./components-scss/carousel";
+@import "./components-scss/eventCategory";
+@import "./components-scss/eventList";
+@import "./components-scss/eventCard";
+@import "./components-scss/footer";
+// page
+@import "./page/login";
+@import "./page/eventDetail";
+@import "./page/addEvent";
+@import "./page/myEvent";
+@import "./page/userAdmin";

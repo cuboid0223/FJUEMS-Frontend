@@ -1,0 +1,21 @@
+.userAdmin {
+  background-color: #fff;
+  margin-top: 40px;
+  padding: 1rem;
+  &__table {
+    width: 100%;
+    border: 1px solid $primary-color;
+  }
+
+  td,
+  th {
+    border: 1px solid $primary-color;
+  }
+  &__deleteBtn {
+    color: red;
+  }
+  &__select{
+      width: 100%;
+      border: none;
+  }
+}

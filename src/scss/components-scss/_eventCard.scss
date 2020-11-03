@@ -1,0 +1,57 @@
+.eventCard {
+    flex: 0.5;
+    min-height: 200px;
+    position: relative;
+    margin: 10px;
+    width: 100%;
+
+    transition: transform 450ms;
+
+    &:hover {
+        transform: scale(1.08);
+        opacity: 1;
+    }
+
+    @include pad {
+        width: 100%;
+        margin: 20px;
+        flex: unset;
+    }
+
+    // &__thumbnail {
+    //     width: 100%;
+    // }
+    &__info {
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        color: #fff;
+        background-image: linear-gradient(180deg,
+                transparent,
+                rgba(37, 37, 37, 0.61),
+                #111);
+    }
+
+    &__title {
+        font-size: 20px;
+        margin-top: 20px;
+        margin-bottom: 0rem;
+        padding: 0 5px;
+    }
+
+    &__wrap {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px;
+    }
+
+    &__date {
+        margin-bottom: 0rem;
+    }
+
+    &__btn {
+        color: $primary-color;
+        cursor: pointer;
+    }
+}

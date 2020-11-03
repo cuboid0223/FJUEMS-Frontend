@@ -1,0 +1,19 @@
+.footer {
+  width: 100%;
+  background-color: #444545;
+  padding: 20px;
+  color: lightgray;
+
+  &__title {
+  }
+
+  &__table {
+    width: 50%;
+  }
+
+  tr,
+  td,
+  th {
+    border: 1px solid $primary-color;
+  }
+}

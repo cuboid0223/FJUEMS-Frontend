@@ -1,0 +1,15 @@
+$primary-color: #65c025;
+$white: #eff2f5;
+
+
+$font-s: 16px;
+$font-m: 20px;
+$font-l: 24px;
+
+$eventCategory-width: 100%;
+
+@mixin hide-text {
+  overflow: hidden;
+  text-indent: 101%;
+  white-space: nowrap;
+}

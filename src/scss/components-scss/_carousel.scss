@@ -1,0 +1,13 @@
+.carousel {
+  max-height: 600px;
+  cursor: pointer;
+  margin-top: 30px;
+
+  @include pad {
+    width: 100%;
+  }
+
+  .carousel-control-prev, .carousel-control-next {
+    top: 50%;
+  }
+}

@@ -1,0 +1,32 @@
+.eventCategory {
+    // --eventCategory-width:100%;
+    width: $eventCategory-width;
+    display: flex;
+    flex-wrap: wrap;
+    border: 2px solid white;
+    margin-top: 1rem;
+
+    &__item {
+        width: 25%;
+        border-right: 1px solid white;
+        border-bottom: 1px solid white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-top: 5px;
+        cursor: pointer;
+
+
+        &:hover {
+            color: $primary-color;
+            transition: .5s;
+        }
+
+        &:hover>pre {
+            color: $primary-color;
+            transition: .3s;
+        }
+
+    }
+}
