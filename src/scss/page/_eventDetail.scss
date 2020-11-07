@@ -10,8 +10,8 @@
         display: flex;
         justify-content: space-around;
     }
-    &__join, &__inJoin{
-        width: 30%;
+    &__join, &__inJoin,&__update,&__delete{
+        width: 20%;
         background-color: $primary-color;
         border: none;
         padding: 10px 0px;
@@ -22,7 +22,10 @@
         font-size: large;
         font-weight: bolder;
     }
-    &__inJoin{
+    &__inJoin,&__delete{
         background-color: red;
+    }
+    &__update{
+        background-color: orange;
     }
 }

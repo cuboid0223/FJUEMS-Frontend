@@ -289,6 +289,7 @@
 }
 
 .eventList {
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -298,13 +299,10 @@
 }
 
 .eventCard {
-  -webkit-box-flex: 0.5;
-      -ms-flex: 0.5;
-          flex: 0.5;
+  width: 48%;
   min-height: 200px;
   position: relative;
-  margin: 10px;
-  width: 100%;
+  margin: 1%;
   -webkit-transition: -webkit-transform 450ms;
   transition: -webkit-transform 450ms;
   transition: transform 450ms;
@@ -374,6 +372,12 @@
 
 .footer__table {
   width: 50%;
+}
+
+@media (max-width: 568px) {
+  .footer__table {
+    width: 100%;
+  }
 }
 
 .footer tr,
@@ -465,8 +469,8 @@
       justify-content: space-around;
 }
 
-.eventDetail__join, .eventDetail__inJoin {
-  width: 30%;
+.eventDetail__join, .eventDetail__inJoin, .eventDetail__update, .eventDetail__delete {
+  width: 20%;
   background-color: #65c025;
   border: none;
   padding: 10px 0px;
@@ -478,8 +482,12 @@
   font-weight: bolder;
 }
 
-.eventDetail__inJoin {
+.eventDetail__inJoin, .eventDetail__delete {
   background-color: red;
+}
+
+.eventDetail__update {
+  background-color: orange;
 }
 
 .addEvent img {
@@ -609,7 +617,7 @@
   }
 }
 
-.myEvent__aboutMe__deleteBtn {
+.myEvent__aboutMe__deleteBtn, .myEvent__aboutMe__updateBtn {
   width: 100%;
   background-color: red;
   border: none;
@@ -618,6 +626,10 @@
   color: #f5f5f5;
   font-size: large;
   font-weight: bolder;
+}
+
+.myEvent__aboutMe__updateBtn {
+  background-color: orange;
 }
 
 .myEvent__countEvents {
@@ -655,6 +667,7 @@
 }
 
 .myEvent .eventCard {
+  width: 100%;
   margin: 10px 0px;
 }
 

@@ -34,6 +34,8 @@ const EventDetail = ({ photoURL, title, date }) => {
       <div className="eventDetail__input">
         <input type="submit" value="立即報名" className="eventDetail__join" />
         <input type="submit" value="取消報名" className="eventDetail__inJoin" />
+        <input type="submit" value="修改活動" className="eventDetail__update" />
+        <input type="submit" value="刪除活動" className="eventDetail__delete" />
       </div>
     </div>
   );

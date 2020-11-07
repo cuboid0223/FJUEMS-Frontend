@@ -9,6 +9,9 @@
 
   &__table {
     width: 50%;
+    @include iphone{
+        width: 100%;
+    }
   }
 
   tr,

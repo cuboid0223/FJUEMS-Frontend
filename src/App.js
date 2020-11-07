@@ -9,7 +9,7 @@ import MyEvent from "./components/MyEvent";
 import Login from "./components/Login";
 import EventDetail from "./components/EventDetail";
 import UserAdmin from "./components/UserAdmin";
-import AboutMe from "./components/AboutMe";
+
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import "./scss/all.css";
@@ -22,12 +22,7 @@ function App() {
       <Router>
         <Header />
         <Switch>
-          <Route path="/aboutMe">
-            <div className="app__page">
-              <AboutMe />
-            </div>
-          </Route>
-
+          
           <Route path="/userAdmin">
             <div className="app__page">
               <UserAdmin />

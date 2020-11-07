@@ -17,9 +17,6 @@ const Header = () => {
             <Link to="/">首頁</Link>
           </li>
           <li>
-            <Link to="/aboutMe">個人</Link>
-          </li>
-          <li>
             <Link to="/login">登入</Link>
           </li>
           <hr />

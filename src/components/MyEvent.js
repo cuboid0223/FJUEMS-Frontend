@@ -11,9 +11,14 @@ const MyEvent = () => {
           <p>帳號： 32233035</p>
           <p>權限： 一般會員</p>
           <input
-            type="submit"
+            type="button"
             value="刪除帳號"
             className="myEvent__aboutMe__deleteBtn"
+          />
+          <input
+            type="button"
+            value="編輯帳密"
+            className="myEvent__aboutMe__updateBtn"
           />
         </div>
       </div>
