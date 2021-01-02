@@ -4,14 +4,14 @@ const EventDetail = ({ photoURL, title, date }) => {
   return (
     <div className="eventDetail">
       <img
-        src="https://t.kfs.io/organization_resource_files/8544/36955/__________1200x630__1_.jpg"
+        src={photoURL}
         alt="..."
         className="eventDetail__banner"
       />
 
       <div className="eventDetail__info">
-        <h3>title</h3>
-        <p>date</p>
+        <h3>{title}</h3>
+        <p>{date}</p>
         <mark>.... markdown 語法傳入</mark>
         <p>
           人生就是一場旅行 我們向著未知出發 不斷相遇 不問目的 旅程還遙遠

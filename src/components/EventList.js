@@ -1,41 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import EventCard from "./EventCard";
-
+import axios from "axios";
 const EventList = () => {
+  const [events, setEvents] = useState([]);
+  useEffect(() => {
+    axios
+      .post("http://localhost:8888/fjuems/fjuems-backend/eventData.php")
+      .then((res) => {
+        const data = res.data; //
+        setEvents(data);
+        console.log(data);
+      })
+      .catch((err) => console.log(err));
+  },[]);
+  // const listOfEvent = events.map((eve_title, eve_imgURL) => (
+  //   <EventCard photoURL={eve_imgURL} title={eve_title} date="2020/02/23" />
+  // ));
+
   return (
     <div className="eventList">
-      <EventCard
+      {/* {listOfEvent} */}
+      {events.map((event) => (
+        <EventCard
+          key={event.eve_id}
+          photoURL={event.eve_imgURL}
+          title={event.eve_title}
+          dateStart={event.eve_dateStart}
+          dateEnd={event.eve_dateEnd}
+          timeStart={event.eve_timeStart}
+          timeEnd={event.eve_timeEnd}
+        />
+      ))}
+      {/* <EventCard
         photoURL="https://t.kfs.io/organization_resource_files/8544/36955/__________1200x630__1_.jpg"
         title="【 A-Lin 2020《Passenger 旅．課》世界巡迴演唱會 高雄站 】"
         date="2020/02/23"
-      />
-
-      <EventCard
-        photoURL="https://t.kfs.io/upload_images/119666/______1200x630_large.jpg"
-        title="【高雄場】聽都沒聽過的巡迴"
-        date="2020/10/16(周五) 20:00(+0800) ~ 22:00(+0800)"
-      />
-      <EventCard
-        photoURL="https://t.kfs.io/upload_images/120150/____large.jpg"
-        title="REDBULL TURN IT UP 台中吃漢場"
-        date="2020/10/17(周六) 16:00(+0800) "
-      />
-      <EventCard
-        photoURL="https://t.kfs.io/organization_resource_files/8544/36955/__________1200x630__1_.jpg"
-        title="【 A-Lin 2020《Passenger 旅．課》世界巡迴演唱會 高雄站 】"
-        date="2020/02/23"
-      />
-
-      <EventCard
-        photoURL="https://t.kfs.io/upload_images/119666/______1200x630_large.jpg"
-        title="【高雄場】聽都沒聽過的巡迴"
-        date="2020/10/16(周五) 20:00(+0800) ~ 22:00(+0800)"
-      />
-      <EventCard
-        photoURL="https://t.kfs.io/upload_images/120150/____large.jpg"
-        title="REDBULL TURN IT UP 台中吃漢場"
-        date="2020/10/17(周六) 16:00(+0800) "
-      />
+      /> */}
     </div>
   );
 };

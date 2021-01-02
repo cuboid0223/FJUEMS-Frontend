@@ -299,6 +299,7 @@
 }
 
 .eventCard {
+  background-color: #444545;
   width: 48%;
   min-height: 200px;
   position: relative;
