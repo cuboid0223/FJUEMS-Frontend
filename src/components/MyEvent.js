@@ -12,8 +12,15 @@ const MyEvent = () => {
           <p>權限： 一般會員</p>
           <input
             type="button"
+            value="登出"
+            className="myEvent__aboutMe__deleteBtn"
+            //onclick={}
+          />
+          <input
+            type="button"
             value="刪除帳號"
             className="myEvent__aboutMe__deleteBtn"
+            //onclick={() => alert('kkk')}
           />
           <input
             type="button"
