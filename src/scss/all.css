@@ -671,6 +671,10 @@
   margin: 10px 0px;
 }
 
+.myEvent .hide-btn {
+  display: none;
+}
+
 .userAdmin {
   background-color: #fff;
   margin-top: 40px;

@@ -1,51 +1,43 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-
+import { useStateValue } from "../StateProvider";
+import { actionTypes } from "../reducer";
+import { Link } from "react-router-dom";
 // import axios from "../api/axios";
 import axios from "axios";
 const Login = () => {
-  const [submitDisabled, setSubmitDisabled] = useState(false);
+  // const [submitDisabled, setSubmitDisabled] = useState(false);
   const [user, setUser] = useState(null);
-  const [name, setName] = useState("");
-  const [account, setAccount] = useState("");
-  const [password, setPassword] = useState("");
   const history = useHistory();
+  const [{}, dispatch] = useStateValue();
 
   const { register, handleSubmit, errors } = useForm(); // react-hook-form
+  //登入功能
   const onSubmit = (data) => {
-    console.log(data);
+    //console.log(data);
     const formData = data;
     axios
       .post("http://localhost:8888/fjuems/fjuems-backend/login.php", formData)
       .then((res) => {
         const user = res.data; //
-        setUser(user);
-        console.log(user)
+        if (user != null || user != 'undefined') {
+          setUser(user);
+          sessionStorage.setItem("user", user);
+          sessionStorage.setItem("user_name", user.user_name);
+          sessionStorage.setItem("user_account", user.user_account);
+          sessionStorage.setItem("user_auth", user.user_auth);
+          dispatch({
+            type: actionTypes.SET_USER,
+            user: JSON.parse(JSON.stringify(user)), //把 User 丟到 Global State（contextAPI）
+          });
+          history.push("/");
+        }
+        console.log("User: ", user);
       })
       .catch((err) => console.log(err));
-    if (user != null) {
-      history.push("/");
-    }
   };
-
-  const registerSubmit = (e) => {
-    e.preventDefault();
-    let formData = new FormData();
-    formData.append("name", name);
-    formData.append("account", account);
-    formData.append("password", password);
-    axios
-      .post("http://localhost:8888/fjuems/fjuems-backend/login.php", formData)
-      .then((res) => {
-        const name = res.data; //
-        console.log(name);
-      }) 
-      .catch((err) => console.log(err));
-  };
-  useEffect(() => {
-    
-  },[])
+  
   return (
     <div className="login">
       <h1 className="login__logo">FJUEMS 登入</h1>
@@ -70,34 +62,7 @@ const Login = () => {
           className="login__btn"
         />
       </form>
-
-      <h1 className="login__logo ">註冊</h1>
-      <form
-        // action="/fjuems-backend/resign.php"
-        className="login__form"
-        // method="post"
-      >
-        姓名：
-        <input
-          type="text"
-          name="resign_name"
-          required
-          onChange={(e) => setName(e.target.value)}
-        />
-        <br />
-        帳號：
-        <input type="text" name="resign_account" required />
-        <br />
-        密碼：
-        <input type="password" name="resign_password" required />
-        <br />
-        <input
-          type="submit"
-          value="註冊"
-          className="login__btn"
-          onClick={registerSubmit}
-        />
-      </form>
+      <Link to="/register">註冊帳號</Link>
     </div>
   );
 };

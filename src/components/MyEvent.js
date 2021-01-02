@@ -1,31 +1,50 @@
 import React from "react";
 import EventCard from "./EventCard";
 import { Avatar } from "@material-ui/core";
+// React Context API
+import { useStateValue } from "../StateProvider"; 
+import { actionTypes } from "../reducer";
+import { useHistory } from "react-router-dom";
 const MyEvent = () => {
+  const [{ user }, dispatch] = useStateValue();
+  console.log("USER: ", user);
+  const user_name = sessionStorage.getItem("user_name");
+  const user_account = sessionStorage.getItem("user_account");
+  const user_auth = sessionStorage.getItem("user_auth");
+
+  const history = useHistory();
+  const logout = () => {
+    dispatch({
+      type: actionTypes.SET_USER,
+      user: null, //把 User 丟到 Global State（contextAPI）
+    });
+    history.push('/')
+  }
+
   return (
     <div className="myEvent">
       <div className="myEvent__aboutMe">
         <Avatar className="myEvent__aboutMe__avatar" />
         <div className="myEvent__aboutMe__Info">
-          <h2>陳泓棣</h2>
-          <p>帳號： 32233035</p>
-          <p>權限： 一般會員</p>
+          <h2>{user ? user_name : "請先登入"}</h2>
+          <p>學號： {user ? user_account : "請先登入"}</p>
+          <p>權限： {user ? user_auth : "無權限"}</p>
           <input
             type="button"
             value="登出"
-            className="myEvent__aboutMe__deleteBtn"
-            //onclick={}
+            className={user ? "myEvent__aboutMe__deleteBtn" : "hide-btn"}
+            onClick={logout}
           />
           <input
             type="button"
             value="刪除帳號"
-            className="myEvent__aboutMe__deleteBtn"
+            className={user ? "myEvent__aboutMe__deleteBtn" : "hide-btn"}
             //onclick={() => alert('kkk')}
           />
           <input
             type="button"
             value="編輯帳密"
-            className="myEvent__aboutMe__updateBtn"
+            className={user ? "myEvent__aboutMe__updateBtn" : "hide-btn"}
           />
         </div>
       </div>

@@ -9,6 +9,7 @@ import MyEvent from "./components/MyEvent";
 import Login from "./components/Login";
 import EventDetail from "./components/EventDetail";
 import UserAdmin from "./components/UserAdmin";
+import Register from "./components/Register";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -21,7 +22,6 @@ function App() {
       <Router>
         <Header />
         <Switch>
-          
           <Route path="/userAdmin">
             <div className="app__page">
               <UserAdmin />
@@ -43,6 +43,12 @@ function App() {
           <Route path="/addEvent">
             <div className="app__page">
               <AddEvent />
+            </div>
+          </Route>
+
+          <Route path="/register">
+            <div className="app__page">
+              <Register />
             </div>
           </Route>
 
