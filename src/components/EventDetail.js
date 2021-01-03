@@ -35,7 +35,7 @@ const EventDetail = () => {
 
   return (
     <div className="eventDetail">
-      <img src={imgURL} alt="..." className="eventDetail__banner" />
+      <img src={imgURL} alt="" className="eventDetail__banner" />
 
       <div className="eventDetail__info">
         <h3>{title}</h3>

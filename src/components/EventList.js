@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import EventCard from "./EventCard";
 
-// import { useStateValue } from "../StateProvider";
-// import { actionTypes } from "../reducer";
+
 const EventList = ({events}) => {
   //console.log(events)
   return (
@@ -19,6 +18,8 @@ const EventList = ({events}) => {
           timeEnd={event.eve_timeEnd}
         />
       ))}
+
+
       {/* <EventCard
         photoURL="https://t.kfs.io/organization_resource_files/8544/36955/__________1200x630__1_.jpg"
         title="【 A-Lin 2020《Passenger 旅．課》世界巡迴演唱會 高雄站 】"
