@@ -18,6 +18,7 @@ const MyEvent = () => {
       type: actionTypes.SET_USER,
       user: null, //把 User 丟到 Global State（contextAPI）
     });
+    sessionStorage.clear();
     history.push('/')
   }
 
@@ -26,25 +27,31 @@ const MyEvent = () => {
       <div className="myEvent__aboutMe">
         <Avatar className="myEvent__aboutMe__avatar" />
         <div className="myEvent__aboutMe__Info">
-          <h2>{user ? user_name : "請先登入"}</h2>
-          <p>學號： {user ? user_account : "請先登入"}</p>
-          <p>權限： {user ? user_auth : "無權限"}</p>
+          <h2>{user_name ? user_name : "請先登入"}</h2>
+          <p>學號： {user_account ? user_account : "請先登入"}</p>
+          <p>權限： {user_auth ? user_auth : "無權限"}</p>
           <input
             type="button"
             value="登出"
-            className={user ? "myEvent__aboutMe__deleteBtn" : "hide-btn"}
+            className={
+              user_account ? "myEvent__aboutMe__deleteBtn" : "hide-btn"
+            }
             onClick={logout}
           />
           <input
             type="button"
             value="刪除帳號"
-            className={user ? "myEvent__aboutMe__deleteBtn" : "hide-btn"}
+            className={
+              user_account ? "myEvent__aboutMe__deleteBtn" : "hide-btn"
+            }
             //onclick={() => alert('kkk')}
           />
           <input
             type="button"
             value="編輯帳密"
-            className={user ? "myEvent__aboutMe__updateBtn" : "hide-btn"}
+            className={
+              user_account ? "myEvent__aboutMe__updateBtn" : "hide-btn"
+            }
           />
         </div>
       </div>

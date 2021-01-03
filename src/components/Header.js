@@ -4,6 +4,7 @@ import NotificationsActiveIcon from "@material-ui/icons/NotificationsActive";
 import SearchIcon from "@material-ui/icons/Search";
 import { Link } from "react-router-dom";
 const Header = () => {
+  const user_auth = sessionStorage.getItem("user_auth");
   return (
     <div className="header">
       <MenuIcon fontSize="large" className="header__burgerIcon" />
@@ -20,13 +21,16 @@ const Header = () => {
             <Link to="/login">登入</Link>
           </li>
           <hr />
-          <li>
-            <Link to="/addEvent">新增活動</Link>
-          </li>
-          <li>
-            <Link to="/userAdmin">管理會員</Link>
-          </li>
-          <hr/>
+          {user_auth != "normal" && (
+            <li>
+              <Link to="/addEvent">新增活動</Link>
+            </li>
+          )}
+          {user_auth != "normal" && (
+            <li>
+              <Link to="/userAdmin">管理會員</Link>
+            </li>
+          )}
         </ul>
         <div className="header__search">
           <input type="text" placeholder="搜尋活動" />

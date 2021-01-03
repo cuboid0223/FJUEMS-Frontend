@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import DoubleArrowOutlinedIcon from "@material-ui/icons/DoubleArrowOutlined";
 import { Link } from "react-router-dom";
-
+import { actionTypes } from "../reducer";
+import { useStateValue } from "../StateProvider";
+import { useParams } from "react-router-dom";
 const EventCard = ({
-  key,
+  eventId,
   photoURL,
   title,
   dateStart,
@@ -11,6 +13,19 @@ const EventCard = ({
   timeStart,
   timeEnd,
 }) => {
+  const [{ selectedEventId }, dispatch] = useStateValue();
+
+  const sendId = () => {
+    dispatch({
+      type: actionTypes.SET_SELECTEDEVENTID,
+      selectedEventId: eventId, //把 eventId 丟到 Global State（contextAPI）
+    });
+    window.location.reload();//刷新頁面讓新的session能呈現 
+    sessionStorage.setItem("eventId", eventId);
+  };
+
+  let id = useParams();
+
   return (
     <div
       className="eventCard"
@@ -19,8 +34,9 @@ const EventCard = ({
         backgroundImage: `url(${photoURL})`,
         backgroundPosition: "center center",
       }}
+      onClick={sendId}
     >
-      <Link to={`/eventDetail`}>
+      <Link to={`/eventDetail?eve_id=${eventId}`}>
         <div className="eventCard__info">
           <h3 className="eventCard__title">{title}</h3>
           <div className="eventCard__wrap">

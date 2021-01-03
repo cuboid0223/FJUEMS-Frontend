@@ -26,7 +26,7 @@ const Login = () => {
           sessionStorage.setItem("user", user);
           sessionStorage.setItem("user_name", user.user_name);
           sessionStorage.setItem("user_account", user.user_account);
-          sessionStorage.setItem("user_auth", user.user_auth);
+          sessionStorage.setItem("user_auth", user.auth_name);
           dispatch({
             type: actionTypes.SET_USER,
             user: JSON.parse(JSON.stringify(user)), //把 User 丟到 Global State（contextAPI）

@@ -9,7 +9,7 @@ const [input, setInput] = useState("")
   return (
     <div className="addEvent">
       <div className="addEvent__wrapper">
-        <div className="addEvent__leftContainer">
+        <form className="addEvent__leftContainer">
           <div className="addEvent__item">
             <p>新增活動封面: </p>
             <input type="file" />
@@ -29,7 +29,8 @@ const [input, setInput] = useState("")
           </div>
 
           <textarea onChange={(e) => setInput(e.target.value)} />
-        </div>
+          <input type="submit" value="新增" className="addEvent__btn" />
+        </form>
 
         <div className="addEvent__markdown">
           <ReactMarkdown
@@ -38,7 +39,6 @@ const [input, setInput] = useState("")
           />
         </div>
       </div>
-      <input type="submit" value="新增" className="addEvent__btn" />
     </div>
   );
 };

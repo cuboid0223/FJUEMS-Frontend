@@ -1,15 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
-import { StateProvider } from "./StateProvider";// ContextAPI
-import reducer, { initialState } from "./reducer";// ContextAPI
-
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
+import { StateProvider } from "./StateProvider"; // ContextAPI
+import reducer, { initialState } from "./reducer"; // ContextAPI
+import { CookiesProvider } from "react-cookie"; // react-cookie
 ReactDOM.render(
   <React.StrictMode>
     <StateProvider initialState={initialState} reducer={reducer}>
-      <App />
+      <CookiesProvider>
+        <App />
+      </CookiesProvider>
     </StateProvider>
   </React.StrictMode>,
   document.getElementById("root")

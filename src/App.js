@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
 import Carousel from "./components/Carousel";
 import EventCategory from "./components/EventCategory";
@@ -10,12 +10,32 @@ import Login from "./components/Login";
 import EventDetail from "./components/EventDetail";
 import UserAdmin from "./components/UserAdmin";
 import Register from "./components/Register";
-
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
+import axios from "axios";
+//import { useStateValue } from "./StateProvider";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useParams,
+} from "react-router-dom";
 import "./scss/all.css";
 
 function App() {
+  const [events, setEvents] = useState([]);
+  //const [{ selectedEventId }, dispatch] = useStateValue();
+  useEffect(() => {
+    axios
+      .post("http://localhost:8888/fjuems/fjuems-backend/eventData.php")
+      .then((res) => {
+        const data = res.data; //
+        setEvents(data);
+        console.log(data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  
+
   return (
     <div className="app">
       {/* header */}
@@ -65,7 +85,7 @@ function App() {
               {/* 興趣選項 icon with materialUI */}
               <EventCategory />
               {/* event card list*/}
-              <EventList />
+              <EventList events={events} />
             </div>
             {/* footer */}
             <Footer />

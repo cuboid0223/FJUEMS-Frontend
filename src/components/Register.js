@@ -3,27 +3,15 @@ import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { useStateValue } from "../StateProvider";
 import { actionTypes } from "../reducer";
-// import axios from "../api/axios";
 import axios from "axios";
 const Register = () => {
   const [password, setPassword] = useState("");
-  const [password2, setPassword2] = useState("");
-  const [submitDisabled, setSubmitDisabled] = useState(true);
+  //const [password2, setPassword2] = useState("");
+  //const [submitDisabled, setSubmitDisabled] = useState(true);
   const history = useHistory();
   const [{}, dispatch] = useStateValue();
   const { register, handleSubmit, errors } = useForm(); // react-hook-form
-  // 密碼 輸入二次驗證
-//   console.log("pass: ", password);
-//   console.log(password2);
-//   console.log(submitDisabled);
-//   const checkPass = () => {
-//     console.log('check');
-//     if (password == password2) {
-//       setSubmitDisabled(false);
-//     } else {
-//       setSubmitDisabled(true);
-//     }
-//   };
+
   //註冊功能
   const registerSubmit = (data) => {
     //console.log(data);
@@ -35,7 +23,7 @@ const Register = () => {
       )
       .then((res) => {
         const data = res.data; //
-        console.log(data);
+        //console.log(data);
       })
       .catch((err) => console.log(err));
     history.push("/login");
@@ -72,7 +60,7 @@ const Register = () => {
         />
         {errors.resign_password && "Password is required."}
         <br />
-        密碼2：
+        {/* 密碼2：
         <input
           type="password"
           name="resign_password_twice"
@@ -81,7 +69,7 @@ const Register = () => {
             setPassword2(e.target.value);
           }}
         />
-        {errors.resign_password && "Password2 is required."}
+        {errors.resign_password && "Password2 is required."} */}
         <input
           type="submit"
           value="註冊"

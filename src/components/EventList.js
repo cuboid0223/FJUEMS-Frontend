@@ -1,28 +1,16 @@
 import React, { useEffect, useState } from "react";
 import EventCard from "./EventCard";
-import axios from "axios";
-const EventList = () => {
-  const [events, setEvents] = useState([]);
-  useEffect(() => {
-    axios
-      .post("http://localhost:8888/fjuems/fjuems-backend/eventData.php")
-      .then((res) => {
-        const data = res.data; //
-        setEvents(data);
-        console.log(data);
-      })
-      .catch((err) => console.log(err));
-  },[]);
-  // const listOfEvent = events.map((eve_title, eve_imgURL) => (
-  //   <EventCard photoURL={eve_imgURL} title={eve_title} date="2020/02/23" />
-  // ));
 
+// import { useStateValue } from "../StateProvider";
+// import { actionTypes } from "../reducer";
+const EventList = ({events}) => {
+  //console.log(events)
   return (
     <div className="eventList">
-      {/* {listOfEvent} */}
       {events.map((event) => (
         <EventCard
           key={event.eve_id}
+          eventId={event.eve_id}
           photoURL={event.eve_imgURL}
           title={event.eve_title}
           dateStart={event.eve_dateStart}
