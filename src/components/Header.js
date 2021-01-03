@@ -5,7 +5,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import { Link } from "react-router-dom";
 const Header = () => {
   const user_auth = sessionStorage.getItem("user_auth");
- 
+  const ddd = "111";
   return (
     <div className="header">
       <MenuIcon fontSize="large" className="header__burgerIcon" />
