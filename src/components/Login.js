@@ -21,9 +21,10 @@ const Login = () => {
       .post("http://localhost:8888/fjuems/fjuems-backend/login.php", formData)
       .then((res) => {
         const user = res.data; //
-        if (user != null || user != 'undefined') {
+        if (user.user_id != null || user.user_id != "undefined") {
           setUser(user);
           sessionStorage.setItem("user", user);
+          sessionStorage.setItem("user_id", user.user_id);
           sessionStorage.setItem("user_name", user.user_name);
           sessionStorage.setItem("user_account", user.user_account);
           sessionStorage.setItem("user_auth", user.auth_name);

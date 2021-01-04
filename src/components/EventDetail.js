@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useStateValue } from "../StateProvider";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
@@ -9,12 +9,12 @@ const EventDetail = () => {
   const user_auth = sessionStorage.getItem("user_auth");
   const eve_id = sessionStorage.getItem("eventId");
   const [selectedEvent, setSelectedEvent] = useState(null);
-  const [{}, dispatch] = useStateValue();
+  const [{ user }, dispatch] = useStateValue();
   const history = useHistory();
   console.log(user_auth);
 
   //取得該活動資訊
-  useEffect(() => {
+  useMemo(() => {
     axios
       .get(
         `http://localhost:8888/fjuems/fjuems-backend/selectedEvent.php?eventID=${eve_id}`
@@ -42,13 +42,14 @@ const EventDetail = () => {
         console.error(error);
       });
   }, []);
-
+  const userId = sessionStorage.getItem("user_id");
   const title = sessionStorage.getItem("eventTitle");
   const imgURL = sessionStorage.getItem("eventImgURL");
   const eveDes = sessionStorage.getItem("eventDes");
 
   // 刪除活動
   const deleteEvent = () => {
+    alert("是否真的刪除?");
     axios
       .post(
         `http://localhost:8888/fjuems/fjuems-backend/deleteEvent.php?eventID=${eve_id}`
@@ -71,6 +72,34 @@ const EventDetail = () => {
     });
     history.push(`/addEvent?eventID=${eve_id}`);
   };
+
+  //加入活動
+  const joinEvent = () => {
+    console.log("click");
+    if (userId) {
+      // if there is a user, then...need: user_id, eve_id
+      axios
+        .get(
+          `http://localhost:8888/fjuems/fjuems-backend/joinEvent.php?eventID=${eve_id}&userID=${userId}`
+        )
+        .then((res) => {
+          const data = res.data;
+          //console.table(data);
+          if ((data == "you have joined already!!")) {
+            alert("報名失敗，先前已報名過囉");
+          }else{
+            alert("報名成功");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      history.push("/");
+    }
+  };
+  //取消活動
+
   return (
     <div className="eventDetail">
       <img src={imgURL} alt="" className="eventDetail__banner" />
@@ -84,9 +113,15 @@ const EventDetail = () => {
         />
       </div>
       <hr />
-      {user_auth == "normal" ? (
+
+      {user_auth != "admin" ? (
         <div className="eventDetail__input">
-          <input type="submit" value="立即報名" className="eventDetail__join" />
+          <input
+            type="submit"
+            value="立即報名"
+            className="eventDetail__join"
+            onClick={joinEvent}
+          />
           <input
             type="submit"
             value="取消報名"
@@ -95,7 +130,12 @@ const EventDetail = () => {
         </div>
       ) : (
         <div className="eventDetail__input">
-          <input type="submit" value="立即報名" className="eventDetail__join" />
+          <input
+            type="submit"
+            value="立即報名"
+            className="eventDetail__join"
+            onClick={joinEvent}
+          />
           <input
             type="submit"
             value="取消報名"

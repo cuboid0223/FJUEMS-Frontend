@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useMemo } from "react";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import { useTable } from "react-table";
 const UserAdmin = () => {
+  
   return (
     <div className="userAdmin">
       <h5>會員管理</h5>
-      <table className="userAdmin__table">
+      <table className="userAdmin__table" id="userAdmin__table">
         <colgroup span="4"></colgroup>
         <tr>
           <th>會員 ID</th>
@@ -14,7 +16,6 @@ const UserAdmin = () => {
           <th>刪除</th>
         </tr>
 
-        
         <tr>
           <td>162638</td>
           <td>陳泓棣</td>
@@ -29,8 +30,6 @@ const UserAdmin = () => {
             <HighlightOffIcon className="userAdmin__deleteBtn" />
           </td>
         </tr>
-
-
 
         <tr>
           <td>162638</td>
@@ -47,6 +46,7 @@ const UserAdmin = () => {
           </td>
         </tr>
       </table>
+     
     </div>
   );
 };

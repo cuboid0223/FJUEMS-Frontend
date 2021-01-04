@@ -23,7 +23,7 @@ const AddEvent = () => {
   const timeStart = sessionStorage.getItem("eventTimeStart");
   const timeEnd = sessionStorage.getItem("eventTimeEnd");
   const limit = sessionStorage.getItem("eventLimit");
-
+  const user_id = sessionStorage.getItem("user_id");
   //渲染markdown 語法
   const renderMarkDown = (e) => {
     setInput(e.target.value);
@@ -33,6 +33,7 @@ const AddEvent = () => {
   const onSubmit = (data) => {
     console.log(data);
     const formData = data;
+    formData["user_id"] = user_id;
     // if 判斷是否按下 update 按鈕
     if (updateEvent) {
       //修改活動
@@ -44,6 +45,10 @@ const AddEvent = () => {
         .then((res) => {
           const data = res.data; //
           console.log(data);
+          dispatch({
+            type: actionTypes.SET_UPDATEEVENT,
+            updateEvent: false,
+          });
         })
         .catch((err) => console.log(err));
     } else {
@@ -63,13 +68,6 @@ const AddEvent = () => {
     window.location.reload();
   };
 
-  //修改活動
-  //第二步，因為 global state -> updateEvent 為 true
-  // 所以 修改按鈕顯示 ，當按下時轉址到首頁
-  // const handleUpdateEvent = () => {
-
-  //   history.push('/')
-  // }
   return (
     <div className="addEvent">
       <div className="addEvent__wrapper">

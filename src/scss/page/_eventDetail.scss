@@ -4,6 +4,7 @@
   &__banner {
     object-fit: contain;
     width: 100%;
+    max-height: 800px;
   }
 
   &__input {
@@ -35,7 +36,9 @@
 
   &__info img {
     display: block;
-    width: 100%;
+    width: 80%;
     object-fit: contain;
+    max-width:800px;
+    max-height: 1000px;
   }
 }

@@ -9,6 +9,7 @@ import MyEvent from "./components/MyEvent";
 import Login from "./components/Login";
 import EventDetail from "./components/EventDetail";
 import UserAdmin from "./components/UserAdmin";
+import UserAdminTest from "./components/UserAdminTest";
 import Register from "./components/Register";
 import axios from "axios";
 //import { useStateValue } from "./StateProvider";
@@ -34,14 +35,17 @@ function App() {
       .catch((err) => console.log(err));
   }, []);
 
-  
-
   return (
     <div className="app">
       {/* header */}
       <Router>
         <Header />
         <Switch>
+          <Route path="/userAdminTest">
+            <div className="app__page">
+              <UserAdminTest />
+            </div>
+          </Route>
           <Route path="/userAdmin">
             <div className="app__page">
               <UserAdmin />
