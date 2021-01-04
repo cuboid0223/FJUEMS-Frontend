@@ -301,6 +301,7 @@
 .eventCard {
   background-color: #444545;
   width: 48%;
+  height: 100%;
   min-height: 200px;
   position: relative;
   margin: 1%;
@@ -326,8 +327,14 @@
   }
 }
 
+.eventCard__box {
+  width: 100%;
+  min-height: 200px;
+}
+
 .eventCard__info {
   width: 100%;
+  margin-bottom: auto;
   position: absolute;
   bottom: 0;
   color: #fff;
@@ -343,6 +350,7 @@
 }
 
 .eventCard__wrap {
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -489,6 +497,13 @@
 
 .eventDetail__update {
   background-color: orange;
+}
+
+.eventDetail__info img {
+  display: block;
+  width: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 .addEvent img {

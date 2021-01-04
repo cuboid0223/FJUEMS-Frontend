@@ -1,31 +1,41 @@
-.eventDetail{
-    margin-top: 40px;
-    height: 100%;
-    &__banner{
-        object-fit: contain;
-        width: 100%;
-    }
+.eventDetail {
+  margin-top: 40px;
+  height: 100%;
+  &__banner {
+    object-fit: contain;
+    width: 100%;
+  }
 
-    &__input{
-        display: flex;
-        justify-content: space-around;
-    }
-    &__join, &__inJoin,&__update,&__delete{
-        width: 20%;
-        background-color: $primary-color;
-        border: none;
-        padding: 10px 0px;
-        margin-top: 30px;
-        margin-bottom: 30px;
-        border-radius: 20px;
-        color: #f5f5f5;
-        font-size: large;
-        font-weight: bolder;
-    }
-    &__inJoin,&__delete{
-        background-color: red;
-    }
-    &__update{
-        background-color: orange;
-    }
+  &__input {
+    display: flex;
+    justify-content: space-around;
+  }
+  &__join,
+  &__inJoin,
+  &__update,
+  &__delete {
+    width: 20%;
+    background-color: $primary-color;
+    border: none;
+    padding: 10px 0px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-radius: 20px;
+    color: #f5f5f5;
+    font-size: large;
+    font-weight: bolder;
+  }
+  &__inJoin,
+  &__delete {
+    background-color: red;
+  }
+  &__update {
+    background-color: orange;
+  }
+
+  &__info img {
+    display: block;
+    width: 100%;
+    object-fit: contain;
+  }
 }

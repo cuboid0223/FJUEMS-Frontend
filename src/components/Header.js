@@ -2,10 +2,11 @@ import React from "react";
 import MenuIcon from "@material-ui/icons/Menu";
 import NotificationsActiveIcon from "@material-ui/icons/NotificationsActive";
 import SearchIcon from "@material-ui/icons/Search";
+import { useStateValue } from "../StateProvider";
 import { Link } from "react-router-dom";
 const Header = () => {
   const user_auth = sessionStorage.getItem("user_auth");
-  const ddd = "111";
+  const [{ user }, dispatch] = useStateValue();
   return (
     <div className="header">
       <MenuIcon fontSize="large" className="header__burgerIcon" />
@@ -21,9 +22,11 @@ const Header = () => {
               <li>
                 <Link to="/">首頁</Link>
               </li>
+
               <li>
                 <Link to="/login">登入</Link>
               </li>
+
               <li>
                 <Link to="/addEvent">新增活動</Link>
               </li>

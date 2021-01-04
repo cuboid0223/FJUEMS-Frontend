@@ -2,11 +2,13 @@ export const initialState = {
   user: null,
   events: [],
   selectedEventId: "",
+  updateEvent: false,
 };
 export const actionTypes = {
   SET_USER: "SET_USER",
   SET_EVENTS: "SET_EVENTS",
   SET_SELECTEDEVENTID: "SET_SELECTEDEVENTID",
+  SET_UPDATEEVENT: "SET_UPDATEEVENT",
 };
 
 const reducer = (state, action) => {
@@ -26,6 +28,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         selectedEventId: action.selectedEventId,
+      };
+    case actionTypes.SET_UPDATEEVENT:
+      return {
+        ...state,
+        updateEvent: action.updateEvent,
       };
 
     default:
