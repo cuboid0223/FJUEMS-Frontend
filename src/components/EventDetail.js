@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { useStateValue } from "../StateProvider";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
@@ -8,6 +8,10 @@ import { useHistory } from "react-router-dom";
 const EventDetail = () => {
   const user_auth = sessionStorage.getItem("user_auth");
   const eve_id = sessionStorage.getItem("eventId");
+  const userId = sessionStorage.getItem("user_id");
+  const title = sessionStorage.getItem("eventTitle");
+  const imgURL = sessionStorage.getItem("eventImgURL");
+  const eveDes = sessionStorage.getItem("eventDes");
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [{ user }, dispatch] = useStateValue();
   const history = useHistory();
@@ -42,10 +46,8 @@ const EventDetail = () => {
         console.error(error);
       });
   }, []);
-  const userId = sessionStorage.getItem("user_id");
-  const title = sessionStorage.getItem("eventTitle");
-  const imgURL = sessionStorage.getItem("eventImgURL");
-  const eveDes = sessionStorage.getItem("eventDes");
+
+  
 
   // 刪除活動
   const deleteEvent = () => {
@@ -64,7 +66,7 @@ const EventDetail = () => {
     history.push("/");
   };
 
-  // 修改活動第一步、轉址、然後設置 global state -> updateEvent 為true
+  // 修改活動，第一步、轉址、然後設置 global state -> updateEvent 為true
   const ClickUpdateBtn = () => {
     dispatch({
       type: actionTypes.SET_UPDATEEVENT,
@@ -99,6 +101,26 @@ const EventDetail = () => {
     }
   };
   //取消活動
+  const cancelJoinEvent = () => {
+     console.log("click");
+     if (userId) {
+       // if there is a user, then...need: user_id, eve_id
+       axios
+         .get(
+           `http://localhost:8888/fjuems/fjuems-backend/cancelJoinEvent.php?eventID=${eve_id}&userID=${userId}`
+         )
+         .then((res) => {
+           const data = res.data;
+           console.table(data);
+           alert(data)
+         })
+         .catch((error) => {
+           console.log(error);
+         });
+
+       //history.push("/");
+     }
+  }
 
   return (
     <div className="eventDetail">
@@ -140,6 +162,7 @@ const EventDetail = () => {
             type="submit"
             value="取消報名"
             className="eventDetail__inJoin"
+            onClick={cancelJoinEvent}
           />
           <input
             type="submit"
