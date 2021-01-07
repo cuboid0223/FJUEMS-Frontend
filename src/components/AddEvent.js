@@ -4,11 +4,10 @@ import ReactMarkdown from "react-markdown";
 import gfm from "remark-gfm";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import moment from "moment"; // moment.js
+import moment from "moment"; // moment.js to format my website dateTime to match the db time format
 import { actionTypes } from "../reducer";
 import { useStateValue } from "../StateProvider";
-// const input = "# This is a header\n\nAnd this is a paragraph";
-// const markdown =  "This ~is not~ strikethrough, but ~~this is~~!";
+
 const AddEvent = () => {
   const [input, setInput] = useState(""); // react MarkDown State
   const { register, handleSubmit, errors } = useForm(); // react-hook-form
@@ -23,6 +22,8 @@ const AddEvent = () => {
   const timeStart = sessionStorage.getItem("eventTimeStart");
   const timeEnd = sessionStorage.getItem("eventTimeEnd");
   const limit = sessionStorage.getItem("eventLimit");
+  const type = sessionStorage.getItem("eventType");//
+  const typeId =  sessionStorage.getItem("eventTypeId");
   const user_id = sessionStorage.getItem("user_id");
   //渲染markdown 語法
   const renderMarkDown = (e) => {
@@ -31,7 +32,7 @@ const AddEvent = () => {
 
   //新增活動
   const onSubmit = (data) => {
-    console.log(data);
+    //console.log(data);
     const formData = data;
     formData["user_id"] = user_id;
     // if 判斷是否按下 update 按鈕
@@ -44,7 +45,7 @@ const AddEvent = () => {
         )
         .then((res) => {
           const data = res.data; //
-          console.log(data);
+          //console.log(data);
           dispatch({
             type: actionTypes.SET_UPDATEEVENT,
             updateEvent: false,
@@ -67,7 +68,6 @@ const AddEvent = () => {
     history.push("/");
     window.location.reload();
   };
-
   return (
     <div className="addEvent">
       <div className="addEvent__wrapper">
@@ -101,6 +101,27 @@ const AddEvent = () => {
             />
             {errors.title_input && "Title is required."}
           </div>
+          <div className="addEvent__item">
+            <label for="type">活動類别:</label>
+            <select
+              id="type"
+              ref={register({ required: true })}
+              name="type_input"
+              defaultValue={updateEvent ? type : ""}
+            >
+              {/* hardcore, get data from db */}
+              <option></option>
+              <option value="1">音樂</option>
+              <option value="2">哲理</option>
+              <option value="3">財經</option>
+              <option value="4" {...type == "4"? "selected" : ""}>保健</option>
+              <option value="5">人際關係</option>
+              <option value="6">學習</option>
+              <option value="7">資訊</option>
+              <option value="8">其他</option>
+            </select>
+          </div>
+          {errors.type_input && "請選擇類別"}
           <div className="addEvent__item">
             <p>活動時間: </p>
             <input

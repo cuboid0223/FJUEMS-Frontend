@@ -11,11 +11,12 @@ const EventDetail = () => {
   const userId = sessionStorage.getItem("user_id");
   const title = sessionStorage.getItem("eventTitle");
   const imgURL = sessionStorage.getItem("eventImgURL");
+  const type = sessionStorage.getItem("eventType"); //
   const eveDes = sessionStorage.getItem("eventDes");
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [{ user }, dispatch] = useStateValue();
   const history = useHistory();
-  console.log(user_auth);
+  //console.log(user_auth);
 
   //取得該活動資訊
   useMemo(() => {
@@ -26,7 +27,7 @@ const EventDetail = () => {
       .then((res) => {
         const data = res.data;
         // setEventInfo(event);
-        console.table(data);
+        //console.table(data);
         const Id = data[0].eve_id;
         const title = data[0].eve_title;
         const imgURL = data[0].eve_imgURL;
@@ -34,6 +35,8 @@ const EventDetail = () => {
         const eveTimeStart = data[0].eve_timeStart;
         const eveTimeEnd = data[0].eve_timeEnd;
         const eveLimit = data[0].eve_limit;
+        const eveType = data[0].type_name;
+        const eveTypeId = data[0].type_id;
         sessionStorage.setItem("eventId", Id);
         sessionStorage.setItem("eventTitle", title);
         sessionStorage.setItem("eventImgURL", imgURL);
@@ -41,13 +44,13 @@ const EventDetail = () => {
         sessionStorage.setItem("eventTimeStart", eveTimeStart);
         sessionStorage.setItem("eventTimeEnd", eveTimeEnd);
         sessionStorage.setItem("eventLimit", eveLimit);
+        sessionStorage.setItem("eventTypeName", eveType);
+        sessionStorage.setItem("eventTypeId", eveTypeId);
       })
       .catch((error) => {
         console.error(error);
       });
   }, []);
-
-  
 
   // 刪除活動
   const deleteEvent = () => {
@@ -64,6 +67,7 @@ const EventDetail = () => {
         console.log(error);
       });
     history.push("/");
+    window.location.reload();
   };
 
   // 修改活動，第一步、轉址、然後設置 global state -> updateEvent 為true
@@ -77,7 +81,7 @@ const EventDetail = () => {
 
   //加入活動
   const joinEvent = () => {
-    console.log("click");
+    //console.log("click");
     if (userId) {
       // if there is a user, then...need: user_id, eve_id
       axios
@@ -87,9 +91,9 @@ const EventDetail = () => {
         .then((res) => {
           const data = res.data;
           //console.table(data);
-          if ((data == "you have joined already!!")) {
+          if (data == "you have joined already!!") {
             alert("報名失敗，先前已報名過囉");
-          }else{
+          } else {
             alert("報名成功");
           }
         })
@@ -100,27 +104,27 @@ const EventDetail = () => {
       history.push("/");
     }
   };
+
   //取消活動
   const cancelJoinEvent = () => {
-     console.log("click");
-     if (userId) {
-       // if there is a user, then...need: user_id, eve_id
-       axios
-         .get(
-           `http://localhost:8888/fjuems/fjuems-backend/cancelJoinEvent.php?eventID=${eve_id}&userID=${userId}`
-         )
-         .then((res) => {
-           const data = res.data;
-           console.table(data);
-           alert(data)
-         })
-         .catch((error) => {
-           console.log(error);
-         });
+    if (userId) {
+      // if there is a user, then...need: user_id, eve_id
+      axios
+        .get(
+          `http://localhost:8888/fjuems/fjuems-backend/cancelJoinEvent.php?eventID=${eve_id}&userID=${userId}`
+        )
+        .then((res) => {
+          const data = res.data;
+          //console.table(data);
+          alert(data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
 
-       //history.push("/");
-     }
-  }
+      history.push("/");
+    }
+  };
 
   return (
     <div className="eventDetail">

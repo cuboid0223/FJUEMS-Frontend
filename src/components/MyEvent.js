@@ -1,26 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import EventCard from "./EventCard";
 import { Avatar } from "@material-ui/core";
 // React Context API
-import { useStateValue } from "../StateProvider"; 
+import { useStateValue } from "../StateProvider";
 import { actionTypes } from "../reducer";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
+
 const MyEvent = () => {
   const [{ user }, dispatch] = useStateValue();
   console.log("USER: ", user);
+  const [userEvents, setUserEvents] = useState([]); // storage user events from db
+  const userId = sessionStorage.getItem("user_id");
   const user_name = sessionStorage.getItem("user_name");
   const user_account = sessionStorage.getItem("user_account");
   const user_auth = sessionStorage.getItem("user_auth");
 
   const history = useHistory();
+
+  //登出
   const logout = () => {
     dispatch({
       type: actionTypes.SET_USER,
       user: null, //把 User 丟到 Global State（contextAPI）
     });
     sessionStorage.clear();
-    history.push('/')
-  }
+    history.push("/");
+  };
+  // check my events from data
+  // need userId to access user events
+  useEffect(() => {
+    axios
+      .get(
+        `http://localhost:8888/fjuems/fjuems-backend/checkMyEvent.php?userId=${userId}`
+      )
+      .then((res) => {
+        const data = res.data; //
+        console.table(data);
+        setUserEvents(data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <div className="myEvent">
@@ -58,40 +78,24 @@ const MyEvent = () => {
 
       <div className="myEvent__countEvents">
         <h2>你當月參加了 6 個活動</h2>
-        <p>(總共參加了 6 個活動)</p>
+        <p>(總共參加了 {userEvents.length} 個活動)</p>
       </div>
 
       <div className="myEvent__list">
-        <EventCard
+        {userEvents.map((userEvent) => (
+          <EventCard
+            eventId={userEvent.eve_id}
+            photoURL={userEvent.eve_imgURL}
+            title={userEvent.eve_title}
+            timeStart={userEvent.eve_timeStart}
+            timeEnd={userEvent.eve_timeEnd}
+          />
+        ))}
+        {/* <EventCard
           photoURL="https://t.kfs.io/organization_resource_files/8544/36955/__________1200x630__1_.jpg"
           title="【 A-Lin 2020《Passenger 旅．課》世界巡迴演唱會 高雄站 】"
           date="2020/02/23"
-        />
-        <EventCard
-          photoURL="https://t.kfs.io/upload_images/119666/______1200x630_large.jpg"
-          title="【高雄場】聽都沒聽過的巡迴"
-          date="2020/10/16(周五) 20:00(+0800) ~ 22:00(+0800)"
-        />
-        <EventCard
-          photoURL="https://t.kfs.io/upload_images/120150/____large.jpg"
-          title="REDBULL TURN IT UP 台中吃漢場"
-          date="2020/10/17(周六) 16:00(+0800) "
-        />
-        <EventCard
-          photoURL="https://t.kfs.io/organization_resource_files/8544/36955/__________1200x630__1_.jpg"
-          title="【 A-Lin 2020《Passenger 旅．課》世界巡迴演唱會 高雄站 】"
-          date="2020/02/23"
-        />
-        <EventCard
-          photoURL="https://t.kfs.io/upload_images/119666/______1200x630_large.jpg"
-          title="【高雄場】聽都沒聽過的巡迴"
-          date="2020/10/16(周五) 20:00(+0800) ~ 22:00(+0800)"
-        />
-        <EventCard
-          photoURL="https://t.kfs.io/upload_images/120150/____large.jpg"
-          title="REDBULL TURN IT UP 台中吃漢場"
-          date="2020/10/17(周六) 16:00(+0800) "
-        />
+        /> */}
       </div>
     </div>
   );

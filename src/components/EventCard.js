@@ -7,12 +7,11 @@ const EventCard = ({
   eventId,
   photoURL,
   title,
-  dateStart,
-  dateEnd,
+  type,
   timeStart,
   timeEnd,
 }) => {
-  const [{ selectedEventId }, dispatch] = useStateValue();
+  const [{  }, dispatch] = useStateValue();
 
   const sendId = () => {
     dispatch({

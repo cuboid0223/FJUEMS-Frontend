@@ -1,7 +1,23 @@
-.eventList{
+.eventList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+  &__cardContainer {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     margin-top: 3rem;
-    // background-color: red;
+  }
+  // background-color: red;
+  &__pageContainer {
+      margin-top: 2rem;
+    & a {
+      color: #444545;
+    }
+    & a:hover {
+      color: $primary-color;
+    }
+  }
 }

@@ -6,19 +6,52 @@ const EventList = ({events}) => {
   //console.log(events)
   return (
     <div className="eventList">
-      {events.map((event) => (
-        <EventCard
-          key={event.eve_id}
-          eventId={event.eve_id}
-          photoURL={event.eve_imgURL}
-          title={event.eve_title}
-          dateStart={event.eve_dateStart}
-          dateEnd={event.eve_dateEnd}
-          timeStart={event.eve_timeStart}
-          timeEnd={event.eve_timeEnd}
-        />
-      ))}
+      <div className="eventList__cardContainer">
+        {events.map((event) => (
+          <EventCard
+            key={event.eve_id}
+            eventId={event.eve_id}
+            photoURL={event.eve_imgURL}
+            title={event.eve_title}
+            type={event.eve_type}//
+            timeStart={event.eve_timeStart}
+            timeEnd={event.eve_timeEnd}
+          />
+        ))}
+      </div>
 
+      <nav
+        aria-label="Page navigation example"
+        className="eventList__pageContainer"
+      >
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="?page=1">
+              1
+            </a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">
+              2
+            </a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">
+              3
+            </a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
 
       {/* <EventCard
         photoURL="https://t.kfs.io/organization_resource_files/8544/36955/__________1200x630__1_.jpg"

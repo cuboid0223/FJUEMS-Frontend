@@ -1,12 +1,13 @@
 export const initialState = {
   user: null,
-  events: [],
+  // SearchEvents: [],
+  query: "",
   selectedEvent: null,
   updateEvent: false,
 };
 export const actionTypes = {
   SET_USER: "SET_USER",
-  SET_EVENTS: "SET_EVENTS",
+  SET_SEARCHQUERY: "SET_SEARCHQUERY",
   SET_SELECTEDEVENT: "SET_SELECTEDEVENT",
   SET_UPDATEEVENT: "SET_UPDATEEVENT",
 };
@@ -19,10 +20,10 @@ const reducer = (state, action) => {
         ...state,
         user: action.user,
       };
-    case actionTypes.SET_EVENTS:
+    case actionTypes.SET_SEARCHQUERY:
       return {
         ...state,
-        events: action.events,
+        query: action.query,
       };
     case actionTypes.SET_SELECTEDEVENT:
       return {
