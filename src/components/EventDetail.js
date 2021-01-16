@@ -115,7 +115,7 @@ const EventDetail = () => {
         )
         .then((res) => {
           const data = res.data;
-          //console.table(data);
+          console.table(data);
           alert(data);
         })
         .catch((error) => {
@@ -152,6 +152,7 @@ const EventDetail = () => {
             type="submit"
             value="取消報名"
             className="eventDetail__inJoin"
+            onClick={cancelJoinEvent}
           />
         </div>
       ) : (

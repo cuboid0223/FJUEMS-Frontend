@@ -15,7 +15,7 @@ const Header = () => {
   const searchEvent = (e) => {
     dispatch({
       type: actionTypes.SET_SEARCHQUERY,
-      query: e.target.value, //把 events 丟到 Global State（contextAPI）
+      query: e.target.value, 
     });
     history.push("./eventSearch");
     // axios

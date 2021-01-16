@@ -81,6 +81,13 @@ const AddEvent = () => {
             defaultValue={updateEvent ? id : ""}
             hidden={true}
           />
+          <textarea
+            name="description_textarea"
+            onChange={renderMarkDown}
+            ref={register({ required: true })}
+            defaultValue={updateEvent ? description : ""}
+          />
+          {errors.description_textarea && "description is required."}
 
           <div className="addEvent__item">
             <p>新增活動封面: </p>
@@ -114,14 +121,17 @@ const AddEvent = () => {
               <option value="1">音樂</option>
               <option value="2">哲理</option>
               <option value="3">財經</option>
-              <option value="4" {...type == "4"? "selected" : ""}>保健</option>
+              <option value="4" {...(type == "4" ? "selected" : "")}>
+                保健
+              </option>
               <option value="5">人際關係</option>
               <option value="6">學習</option>
               <option value="7">資訊</option>
               <option value="8">其他</option>
             </select>
+            {errors.type_input && "請選擇類別"}
           </div>
-          {errors.type_input && "請選擇類別"}
+
           <div className="addEvent__item">
             <p>活動時間: </p>
             <input
@@ -154,14 +164,6 @@ const AddEvent = () => {
             />
             {errors.limit_input && "limit is required."}
           </div>
-
-          <textarea
-            name="description_textarea"
-            onChange={renderMarkDown}
-            ref={register({ required: true })}
-            defaultValue={updateEvent ? description : ""}
-          />
-          {errors.description_textarea && "description is required."}
 
           {/* 送出 */}
           {updateEvent ? (

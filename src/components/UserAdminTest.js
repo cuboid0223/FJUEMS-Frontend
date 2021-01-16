@@ -1,122 +1,91 @@
-import React, {useMemo} from 'react'
-import { useTable } from "react-table";
-const UserAdminTest = () => {
-    const data = useMemo(
-      () => [
-        {
-          col_id: "Hello",
-          col_name: "World",
-          col_account: "World",
-          col_auth: "World",
-          delete: "x",
-        },
-        {
-          col_id: "Hello",
-          col_name: "World",
-          col_account: "World",
-          col_auth: "World",
-          delete: "x",
-        },
-        {
-          col_id: "Hello",
-          col_name: "World",
-          col_account: "World",
-          col_auth: "World",
-          delete: "x",
-        },
-      ],
-      []
-    );
-    const columns = useMemo(
-      () => [
-        {
-          Header: "ID",
-          accessor: "col_id", // accessor is the "key" in the data
-        },
-        {
-          Header: "姓名",
-          accessor: "col_name",
-        },
-        {
-          Header: "帳號",
-          accessor: "col_account",
-        },
-        {
-          Header: "權限",
-          accessor: "col_auth",
-        },
-        {
-          Header: "刪除",
-          accessor: "delete",
-        },
-      ],
-      []
-    );
-    const tableInstance = useTable({ columns, data });
-    const {
-      getTableProps,
-      getTableBodyProps,
-      headerGroups,
-      rows,
-      prepareRow,
-    } = tableInstance;
-    return (
-      <div className="userAdminTest">
-        <table {...getTableProps()}>
-          <thead>
-            {
-              // Loop over the header rows
-              headerGroups.map((headerGroup) => (
-                // Apply the header row props
-                <tr {...headerGroup.getHeaderGroupProps()}>
-                  {
-                    // Loop over the headers in each row
-                    headerGroup.headers.map((column) => (
-                      // Apply the header cell props
-                      <th {...column.getHeaderProps()}>
-                        {
-                          // Render the header
-                          column.render("Header")
-                        }
-                      </th>
-                    ))
-                  }
-                </tr>
-              ))
-            }
-          </thead>
-          {/* Apply the table body props */}
-          <tbody {...getTableBodyProps()}>
-            {
-              // Loop over the table rows
-              rows.map((row) => {
-                // Prepare the row for display
-                prepareRow(row);
-                return (
-                  // Apply the row props
-                  <tr {...row.getRowProps()}>
-                    {
-                      // Loop over the rows cells
-                      row.cells.map((cell) => {
-                        // Apply the cell props
-                        return (
-                          <td {...cell.getCellProps()}>
-                            {
-                              // Render the cell contents
-                              cell.render("Cell")
-                            }
-                          </td>
-                        );
-                      })
-                    }
-                  </tr>
-                );
-              })
-            }
-          </tbody>
-        </table>
-      </div>
-    );
-}
+import React, { useEffect, useState, useRef } from "react";
+import { DataGrid, RowsProp, ColDef } from "@material-ui/data-grid";
+import axios from "axios";
 
-export default UserAdminTest
+const UserAdminTest = () => {
+  const [usersInfo, setUsersInfo] = useState(null);
+  const [fetched, setFetched] = useState(false);
+  const users = useRef();
+  
+
+  const columns = [
+    { field: "id", headerName: "編號", width: 130 },
+    { field: "user_id", headerName: "ID", width: 130 },
+    { field: "user_name", headerName: "姓名", width: 130 },
+    { field: "user_account", headerName: "學號", width: 130 },
+    {
+      field: "auth_name",
+      headerName: "權限",
+      width: 90,
+    },
+    {
+      field: "dep_name",
+      headerName: "單位",
+      width: 160,
+    },
+  ];
+
+  const rows = [
+    {
+      user_id: "26",
+      user_name: "Cuboid",
+      user_account: "123",
+      auth_name: "admin",
+      id: 1,
+      dep_name: "教務處",
+    },
+    {
+      user_id: "25",
+      user_name: "Auboid",
+      user_account: "123",
+      auth_name: "admin",
+      id: 2,
+      dep_name: "教務處",
+    },
+  ];
+
+  useEffect(() => {
+    const ac = new AbortController();
+    const getAllUser = () => {
+      let id = 1;
+      axios
+        .get("http://localhost:8888/fjuems/fjuems-backend/getAllUser.php", {
+          signal: ac.signal,
+        })
+        .then((res) => {
+          setFetched(true);
+          const usersData = res.data;
+          // if (mounted) {
+          usersData.map((users) => (users["id"] = id++));
+          users.current = usersData;
+          setUsersInfo(usersData);
+          console.log(usersData);
+          console.log(typeof users.current);
+          console.log(usersInfo);
+          //}
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    getAllUser();
+    return () => ac.abort(); // Abort both fetches on unmount
+    //return () => (mounted = false);
+  }, []);
+
+  //const usersList = sessionStorage.getItem("usersList")
+  return (
+    <div>
+      <div style={{ height: 400, width: "100%" }}>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          pageSize={5}
+          checkboxSelection
+        />
+      </div>
+    </div>
+  );
+};
+
+export default UserAdminTest;

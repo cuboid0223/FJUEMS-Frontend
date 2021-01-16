@@ -32,6 +32,7 @@ const Login = () => {
             type: actionTypes.SET_USER,
             user: JSON.parse(JSON.stringify(user)), //把 User 丟到 Global State（contextAPI）
           });
+          alert("登入成功")
           history.push("/");
         }
         console.log("User: ", user);
